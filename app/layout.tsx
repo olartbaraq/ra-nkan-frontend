@@ -1,7 +1,12 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Inter, Alef } from 'next/font/google'
 import './globals.css'
+import { cn } from '@/lib/utils'
+import {Advert, Navbar} from '@/other-components'
 
+
+
+const alef = Alef({ subsets:['latin'], weight: "400", style: "normal", fallback: ['Monospace', 'helvetica'] })
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
@@ -16,7 +21,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={cn("relative h-full antialiased", alef.className)}>
+        <Advert />
+        <Navbar />
+        {children}
+        </body>
     </html>
   )
 }
