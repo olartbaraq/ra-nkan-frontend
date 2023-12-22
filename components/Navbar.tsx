@@ -1,5 +1,5 @@
 "use client"
-import * as React from "react"
+import React, {useState} from "react"
 import { cn } from "@/lib/utils"
 import { MaxWidthWrapper } from '@/other-components'
 import Image from 'next/image'
@@ -9,8 +9,12 @@ import {
     NavigationMenu, NavigationMenuContent, NavigationMenuIndicator,
     NavigationMenuItem, NavigationMenuLink, NavigationMenuList,
     NavigationMenuTrigger,NavigationMenuViewport } from "@/components/ui/navigation-menu"
-
 import { PRODUCT_CATEGORIES } from "@/utils/textdata/category"
+import { Button, buttonVariants } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+
+
+
 
 const ListItem = React.forwardRef<
   React.ElementRef<"a">,
@@ -40,12 +44,18 @@ ListItem.displayName = "ListItem"
 
 
 const Navbar = () => {
+
+  const [search, setsearch] = useState("")
+
+  const SearchProducts = () => {
+    console.log(search)
+  }
     return (
         <MaxWidthWrapper className="border-b border-gray-300">
-            <div className='flex flex-row items-center justify-start h-20 min-w-full'>
+            <div className='hidden sm:flex flex-row items-center justify-between h-20 w-full'>
 
                 <div className='ml-4 lg:ml-0'>
-                    <Link href='/'><Image src={SiteLogo} alt="Ra'Nkan Logo" width={100} height={100}/></Link>
+                  <Link href='/'><Image src={SiteLogo} alt="Ra'Nkan Logo" width={100} height={100} priority={true}/></Link>
                 </div>
                 
                 <NavigationMenu>
@@ -53,7 +63,7 @@ const Navbar = () => {
                         <NavigationMenuItem>
                             <NavigationMenuTrigger>Shop By Category</NavigationMenuTrigger>
                                 <NavigationMenuContent>
-                                    <ul className="grid w-[700px] gap-3 p-4 md:w-[800px] md:grid-cols-5 lg:w-[950px] ">
+                                    <ul className="grid w-[700px] gap-3 p-4 md:max-w-full md:grid-cols-5 lg:max-w-full ">
                                         {PRODUCT_CATEGORIES.map((category) => (
                                             <ListItem
                                             key={category.label}
@@ -74,6 +84,11 @@ const Navbar = () => {
                             </NavigationMenuItem>
                         </NavigationMenuList>
                 </NavigationMenu>
+
+                <div className="flex w-full items-center space-x-5">
+                  <Input className=" ml-2 w-2/3" type="search" onChange={(e) => setsearch(e.target.value)} placeholder="Search for anything" />
+                  <Button onClick={SearchProducts} className={cn(buttonVariants({variant: 'default', size: "lg"}))} type="submit">Search</Button>
+                </div>
             </div>
         </MaxWidthWrapper>
     )
