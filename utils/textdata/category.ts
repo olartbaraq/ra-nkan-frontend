@@ -64,6 +64,126 @@ export const PRODUCT_CATEGORIES = [
         ]
     },
     {
+        label: "Sporting Goods",
+        value: "sporting_goods" as const,
+        featured: [
+            {
+                name: "Cardio Training",
+                href: '#',
+            },
+            {
+                name: "Team Sport",
+                href: '#',
+            },
+            {
+                name: "Outdoor & Adventure",
+                href: '#',
+            },
+            {
+                name: "Accessories",
+                href: '#',
+            },
+            {
+                name: "Strength Training Equipment",
+                href: '#',
+            },
+            {
+                name: "Handsbags & Wallets",
+                href: '#',
+            },
+        ]
+    },
+    {
+        label: "Other Categories",
+        value: "other_categories" as const,
+        featured: [
+            {
+                name: "Miscellaneous",
+                href: '#',
+            },
+            {
+                name: "Pet Supplies",
+                href: '#',
+            },
+            {
+                name: "Musical Instruments",
+                href: '#',
+            },
+            {
+                name: "Digital Products & Services",
+                href: '#',
+            },
+            {
+                name: "Grocery",
+                href: '#',
+            },
+            {
+                name: "Garden & Outdoors",
+                href: '#',
+            },
+        ]
+    },
+    {
+        label: "Gaming",
+        value: "gaming" as const,
+        featured: [
+            {
+                name: "Playstation Consoles",
+                href: '#',
+            },
+            {
+                name: "Xbox Consoles",
+                href: '#',
+            },
+            {
+                name: "Playstation Accessories",
+                href: '#',
+            },
+            {
+                name: "Xbox Accessories",
+                href: '#',
+            },
+            {
+                name: "Nintendo Consoles",
+                href: '#',
+            },
+            {
+                name: "Nintendo Accessories",
+                href: '#',
+            },
+        ]
+    },
+    {
+        label: "Baby Products",
+        value: "baby_products" as const,
+        featured: [
+            {
+                name: "Apparel & Accessories",
+                href: '#',
+            },
+            {
+                name: "Diapering",
+                href: '#',
+            },
+            {
+                name: "Baby & Toddler Toys",
+                href: '#',
+            },
+            {
+                name: "Bathing & Skin Care",
+                href: '#',
+            },
+            {
+                name: "Feeding",
+                href: '#',
+            },
+            {
+                name: "Gear",
+                href: '#',
+            },
+        ]
+    },
+    {
         label: "Home & Office",
         value: "home_office" as const,
         featured: [
@@ -77,20 +197,6 @@ export const PRODUCT_CATEGORIES = [
             },
             {
                 name: "Home & Office Furniture",
-                href: '#',
-            },
-        ]
-    },
-    {
-        label: "Appliances",
-        value: "appliances" as const,
-        featured: [
-            {
-                name: "Small Appliances",
-                href: '#',
-            },
-            {
-                name: "Large Appliances",
                 href: '#',
             },
         ]
@@ -158,121 +264,15 @@ export const PRODUCT_CATEGORIES = [
         ]
     },
     {
-        label: "Baby Products",
-        value: "baby_products" as const,
+        label: "Appliances",
+        value: "appliances" as const,
         featured: [
             {
-                name: "Apparel & Accessories",
+                name: "Small Appliances",
                 href: '#',
             },
             {
-                name: "Diapering",
-                href: '#',
-            },
-            {
-                name: "Baby & Toddler Toys",
-                href: '#',
-            },
-            {
-                name: "Bathing & Skin Care",
-                href: '#',
-            },
-            {
-                name: "Feeding",
-                href: '#',
-            },
-            {
-                name: "Gear",
-                href: '#',
-            },
-        ]
-    },
-    {
-        label: "Gaming",
-        value: "gaming" as const,
-        featured: [
-            {
-                name: "Playstation Consoles",
-                href: '#',
-            },
-            {
-                name: "Xbox Consoles",
-                href: '#',
-            },
-            {
-                name: "Playstation Accessories",
-                href: '#',
-            },
-            {
-                name: "Xbox Accessories",
-                href: '#',
-            },
-            {
-                name: "Nintendo Consoles",
-                href: '#',
-            },
-            {
-                name: "Nintendo Accessories",
-                href: '#',
-            },
-        ]
-    },
-    {
-        label: "Sporting Goods",
-        value: "sporting_goods" as const,
-        featured: [
-            {
-                name: "Cardio Training",
-                href: '#',
-            },
-            {
-                name: "Team Sport",
-                href: '#',
-            },
-            {
-                name: "Outdoor & Adventure",
-                href: '#',
-            },
-            {
-                name: "Accessories",
-                href: '#',
-            },
-            {
-                name: "Strength Training Equipment",
-                href: '#',
-            },
-            {
-                name: "Handsbags & Wallets",
-                href: '#',
-            },
-        ]
-    },
-    {
-        label: "Other Categories",
-        value: "other_categories" as const,
-        featured: [
-            {
-                name: "Miscellaneous",
-                href: '#',
-            },
-            {
-                name: "Pet Supplies",
-                href: '#',
-            },
-            {
-                name: "Musical Instruments",
-                href: '#',
-            },
-            {
-                name: "Digital Products & Services",
-                href: '#',
-            },
-            {
-                name: "Grocery",
-                href: '#',
-            },
-            {
-                name: "Garden & Outdoors",
+                name: "Large Appliances",
                 href: '#',
             },
         ]
