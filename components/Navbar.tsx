@@ -44,7 +44,7 @@ const Navbar = () => {
         <MaxWidthWrapper className="border-b border-gray-300">
             <div className='flex flex-row items-center justify-start h-20 min-w-full'>
 
-                <div className='ml-4 flex lg:ml-0'>
+                <div className='ml-4 lg:ml-0'>
                     <Link href='/'><Image src={SiteLogo} alt="Ra'Nkan Logo" width={100} height={100}/></Link>
                 </div>
                 
@@ -73,7 +73,7 @@ const Navbar = () => {
                                 </NavigationMenuContent>
                             </NavigationMenuItem>
                         </NavigationMenuList>
-                    </NavigationMenu>
+                </NavigationMenu>
             </div>
         </MaxWidthWrapper>
     )

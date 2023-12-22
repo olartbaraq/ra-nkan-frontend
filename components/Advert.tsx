@@ -20,8 +20,9 @@ import { MY_NKANS } from "@/utils/textdata/my_nkan"
 
 const Advert = () => {
   return (
-    <MaxWidthWrapper className="border-b border-gray-300">
-        <div className="flex flex-row justify-between h-6 min-w-full">
+    <div className="border-b border-gray-300">
+        <MaxWidthWrapper  className="py-1">
+            <div className="flex flex-row justify-between h-6 min-w-full">
             <div className="flex flex-row justify-between items-center w-[400px]">
                 <div>
                     <h4>Hi 
@@ -99,8 +100,10 @@ const Advert = () => {
 
             </div>
 
+            </div>
+        </MaxWidthWrapper>
     </div>
-    </MaxWidthWrapper>
+    
     
   )
 }
