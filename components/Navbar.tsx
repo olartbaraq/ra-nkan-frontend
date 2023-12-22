@@ -63,7 +63,7 @@ const Navbar = () => {
                         <NavigationMenuItem>
                             <NavigationMenuTrigger>Shop By Category</NavigationMenuTrigger>
                                 <NavigationMenuContent>
-                                    <ul className="grid w-[700px] gap-3 p-4 md:max-w-full md:grid-cols-5 lg:max-w-full ">
+                                    <ul className="grid w-[1000px] gap-3 p-4 md:max-w-full md:grid-cols-5 lg:max-w-full ">
                                         {PRODUCT_CATEGORIES.map((category) => (
                                             <ListItem
                                             key={category.label}
