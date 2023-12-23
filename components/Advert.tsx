@@ -23,7 +23,7 @@ const Advert = () => {
     <div className="border-b border-gray-300">
         <MaxWidthWrapper className="py-1">
             <div className="flex flex-row justify-between h-6 w-full">
-                <div className="flex flex-row justify-normal space-x-5 items-center w-full">
+                <div className="flex flex-row justify-normal space-x-5 items-center min-w-max">
                         <div>Hi 
                             <span className="text-orange-400 underline mx-2">
                                 <Link href={'/login'}>Sign In</Link>
@@ -38,7 +38,7 @@ const Advert = () => {
                     <h4 className="no-underline hover:underline"><Link href={'/login'}>Help & Contact</Link></h4>
                 </div>
 
-                <div className="flex flex-row justify-normal space-x-6 w-3/4">
+                <div className="flex flex-row justify-center space-x-6 min-w-max">
                 
                     <h4 className="no-underline hover:underline">
                         <Link href={'/login'}>Ship to</Link>

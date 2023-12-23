@@ -1,11 +1,12 @@
-import { MaxWidthWrapper } from '@/other-components'
+import { CarouselItems, MaxWidthWrapper, Categories } from '@/other-components'
 import Image from 'next/image'
 
 export default function Home() {
   return (
     <MaxWidthWrapper>
-      <div>
-        HomePage
+      <div className='flex flex-col space-y-5'>
+        <Categories />
+        <CarouselItems />
       </div>
     </MaxWidthWrapper>
   )

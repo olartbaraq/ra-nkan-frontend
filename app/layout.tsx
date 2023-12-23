@@ -3,7 +3,7 @@ import { Inter, Alef } from 'next/font/google'
 import './globals.css'
 import { cn } from '@/lib/utils'
 import {Advert, Navbar} from '@/other-components'
-
+import { ThemeProvider } from '@/components/ThemeProvider'
 
 
 const alef = Alef({ subsets:['latin'], weight: "400", style: "normal", fallback: ['Monospace', 'helvetica'] })
@@ -21,9 +21,16 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={cn("relative h-full antialiased", alef.className)}>
-        <Advert />
-        <Navbar />
+      <body className={cn("relative h-full antialiased dark:bg-[#1A1C29]", alef.className)}>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="light"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <Advert />
+          <Navbar />
+        </ThemeProvider>
         {children}
         </body>
     </html>
