@@ -1,7 +1,7 @@
 "use client"
 import React, {useState} from "react"
 import { cn } from "@/lib/utils"
-import { MaxWidthWrapper, DarkMode } from '@/other-components'
+import { MaxWidthWrapper, DarkMode, SearchInput } from '@/other-components'
 import Image from 'next/image'
 import Link from "next/link"
 import SiteLogo from "../public/RaNkan_logo.png"
@@ -45,55 +45,51 @@ ListItem.displayName = "ListItem"
 
 const Navbar = () => {
 
-  const [search, setsearch] = useState("")
+  return (
+    <MaxWidthWrapper className="border-b border-gray-300">
+      <div className='hidden sm:flex flex-row items-center justify-start space-x-10 h-20 w-full'>
 
-  const SearchProducts = () => {
-    console.log(search)
-  }
-    return (
-        <MaxWidthWrapper className="border-b border-gray-300">
-            <div className='hidden sm:flex flex-row items-center justify-start space-x-10 h-20 w-full'>
+        <div className='ml-4 lg:ml-0'>
+          <Link className="invert-0 dark:invert" href='/'><Image src={SiteLogo} alt="Ra'Nkan Logo" width={100} height={100} priority={true}/></Link>
+        </div>
+          
+        <NavigationMenu>
+            <NavigationMenuList>
+                <NavigationMenuItem className="hidden lg:block">
+                    <NavigationMenuTrigger>Shop By Category</NavigationMenuTrigger>
+                        <NavigationMenuContent>
+                            <ul className="grid min-w-max gap-3 p-4 md:min-w-max md:grid-cols-5 lg:min-w-max ">
+                                {PRODUCT_CATEGORIES.map((category) => (
+                                    <ListItem
+                                    key={category.label}
+                                    title={category.label}
+                                    // href={category.href}
+                                    >
+                                    {
+                                    category.featured.map(feature => (
+                                        <li className="no-underline hover:underline" key={feature.name}>
+                                            <Link href={`/category/${category.value}/${feature.href}`}>{feature.name}</Link>
+                                        </li>
+                                    ))
+                                    }
+                                    </ListItem>
+                                ))}
+                            </ul>
+                        </NavigationMenuContent>
+                    </NavigationMenuItem>
+                </NavigationMenuList>
+        </NavigationMenu>
 
-                <div className='ml-4 lg:ml-0'>
-                  <Link className="invert-0 dark:invert" href='/'><Image src={SiteLogo} alt="Ra'Nkan Logo" width={100} height={100} priority={true}/></Link>
-                </div>
-                
-                <NavigationMenu>
-                    <NavigationMenuList>
-                        <NavigationMenuItem className="hidden lg:block">
-                            <NavigationMenuTrigger>Shop By Category</NavigationMenuTrigger>
-                                <NavigationMenuContent>
-                                    <ul className="grid min-w-max gap-3 p-4 md:min-w-max md:grid-cols-5 lg:min-w-max ">
-                                        {PRODUCT_CATEGORIES.map((category) => (
-                                            <ListItem
-                                            key={category.label}
-                                            title={category.label}
-                                            // href={category.href}
-                                            >
-                                            {
-                                            category.featured.map(feature => (
-                                                <li className="no-underline hover:underline" key={feature.name}>
-                                                    <Link href={feature.href}>{feature.name}</Link>
-                                                </li>
-                                            ))
-                                            }
-                                            </ListItem>
-                                        ))}
-                                    </ul>
-                                </NavigationMenuContent>
-                            </NavigationMenuItem>
-                        </NavigationMenuList>
-                </NavigationMenu>
+        <div>
+          <SearchInput />
+          {/* <Input className="h-11 w-60 lg:min-w-96 2xl:w-[1000px]" type="search" onChange={(e) => setsearch(e.target.value)} placeholder="Search for anything" />
+          <Button onClick={SearchProducts} type="submit">Search</Button> */}
+        </div>
 
-                <div className="flex min-w-max items-center space-x-7">
-                  <Input className="h-11 w-60 lg:min-w-96 2xl:w-[1000px]" type="search" onChange={(e) => setsearch(e.target.value)} placeholder="Search for anything" />
-                  <Button onClick={SearchProducts} className={cn(buttonVariants({variant: 'default', size: "lg"}))} type="submit">Search</Button>
-                </div>
-
-                <DarkMode />
-            </div>
-        </MaxWidthWrapper>
-    )
+        <DarkMode />
+      </div>
+    </MaxWidthWrapper>
+  )
 }
 
 export default Navbar

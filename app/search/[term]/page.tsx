@@ -2,7 +2,7 @@ import { notFound } from "next/navigation"
 
 type Props = {
     params: {
-        term: string
+      term: string
     }
 }
 

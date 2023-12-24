@@ -5,27 +5,27 @@ export const PRODUCT_CATEGORIES = [
         featured: [
             {
                 name: "Clothing",
-                href: '#',
+                href: 'clothing',
             },
             {
                 name: "Shoes",
-                href: '#',
+                href: 'shoes',
             },
             {
                 name: "Accessories",
-                href: '#',
+                href: 'accessories',
             },
             {
                 name: "Jewlery",
-                href: '#',
+                href: 'ewlery',
             },
             {
                 name: "Underwear & Sleepwear",
-                href: '#',
+                href: 'undies',
             },
             {
                 name: "Handsbags & Wallets",
-                href: '#',
+                href: 'bags',
             },
         ]
     },
@@ -35,31 +35,31 @@ export const PRODUCT_CATEGORIES = [
         featured: [
             {
                 name: "Make Up",
-                href: '#',
+                href: 'makeup',
             },
             {
                 name: "Fragrances",
-                href: '#',
+                href: 'fragrances',
             },
             {
                 name: "Personal Care",
-                href: '#',
+                href: 'personal_care',
             },
             {
                 name: "Hair Care",
-                href: '#',
+                href: 'hair_care',
             },
             {
                 name: "Oral Care",
-                href: '#',
+                href: 'oral_care',
             },
             {
                 name: "Health Care",
-                href: '#',
+                href: 'health_care',
             },
             {
                 name: "Vitamins & Dietary",
-                href: '#',
+                href: 'vitamins',
             },
         ]
     },
