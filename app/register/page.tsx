@@ -68,6 +68,10 @@ const Register = () => {
 
     const { toast } = useToast()
 
+    const GoogleOauth = () => {
+        console.log('Google OAuth')
+    }
+
     // 1. Define your form.
     const form = useForm<z.infer<typeof registerFormSchema>>({
         resolver: zodResolver(registerFormSchema),
@@ -273,9 +277,9 @@ const Register = () => {
                         <div className="relative w-full flex flex-col space-y-10">
                             {/* continue with Oauth here */}
                             <div>
-                                <Button className={cn(buttonVariants({variant: 'ghost'}), "text-2xl h-14 rounded-full")}  onClick={GoogleOauth}>Continue with Google</Button>
+                                <Button className={cn(buttonVariants({variant: 'secondary'}), "text-2xl h-14 rounded-full")}  onClick={GoogleOauth}>Continue with Google</Button>
                                 <div className="absolute top-72 right-4">
-                                    
+
                                 </div>
                             </div>
                         </div>
