@@ -17,7 +17,7 @@ export const PRODUCT_CATEGORIES = [
             },
             {
                 name: "Jewlery",
-                href: 'ewlery',
+                href: 'jewlery',
             },
             {
                 name: "Underwear & Sleepwear",
@@ -111,7 +111,7 @@ export const PRODUCT_CATEGORIES = [
             },
             {
                 name: "Digital Products & Services",
-                href: '#',
+                href: 'digital_products',
             },
             {
                 name: "Grocery",
@@ -129,7 +129,7 @@ export const PRODUCT_CATEGORIES = [
         featured: [
             {
                 name: "Playstation Consoles",
-                href: '#',
+                href: 'playstation',
             },
             {
                 name: "Xbox Consoles",
@@ -207,7 +207,7 @@ export const PRODUCT_CATEGORIES = [
         featured: [
             {
                 name: "Mobile Phones",
-                href: '#',
+                href: 'phones',
             },
             {
                 name: "Tablets",

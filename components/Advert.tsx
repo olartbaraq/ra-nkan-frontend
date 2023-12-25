@@ -23,34 +23,34 @@ const Advert = () => {
     <div className="border-b border-gray-300">
         <MaxWidthWrapper className="py-1">
             <div className="flex flex-row justify-between h-6 w-full">
-                <div className="flex flex-row justify-normal space-x-5 items-center min-w-max">
+                <div className="flex flex-row justify-normal space-x-3 items-center min-w-max">
                         <div>Hi 
-                            <span className="text-orange-400 underline mx-2">
+                            <span className="text-orange-400 text-sm underline mx-2">
                                 <Link href={'/login'}>Sign In</Link>
                             </span> 
                             or 
-                            <span className="text-orange-400 underline mx-2">
-                                <Link href={'/login'}>Register</Link>
+                            <span className="text-orange-400 text-sm underline mx-2">
+                                <Link href={'/register'}>Register</Link>
                             </span>
                         </div>
-                    <h4 className="no-underline hover:underline"><Link href={'/login'}>Daily Deals</Link></h4>
+                    <h4 className="text-sm no-underline hover:underline"><Link href={'/login'}>Daily Deals</Link></h4>
 
-                    <h4 className="no-underline hover:underline"><Link href={'/login'}>Help & Contact</Link></h4>
+                    <h4 className="text-sm no-underline hover:underline"><Link href={'/login'}>Help & Contact</Link></h4>
                 </div>
 
-                <div className="flex flex-row justify-center space-x-6 min-w-max">
+                <div className="flex flex-row justify-center items-center space-x-3 min-w-max">
                 
-                    <h4 className="no-underline hover:underline">
+                    <h4 className=" text-sm hidden lg:block no-underline hover:underline">
                         <Link href={'/login'}>Ship to</Link>
                     </h4>
 
-                    <h4 className="no-underline hover:underline">
+                    <h4 className="text-sm no-underline hover:underline">
                         <Link href={'/login'}>Sell</Link>
                     </h4>
                     
-                    <h4 className="no-underline hover:underline">
+                    <h4 className="text-sm no-underline hover:underline">
                         {/* <Link href={'/login'}> */}
-                            <div className="flex flex-row items-center justify-start">
+                            <div className="hidden lg:flex flex-row items-center justify-start">
                                 <HoverCard>
                                     <HoverCardTrigger>
                                         Watchlist
@@ -65,7 +65,7 @@ const Advert = () => {
                         {/* </Link> */}
                     </h4>
 
-                    <h4 className="no-underline hover:underline">
+                    <h4 className="text-sm no-underline hover:underline">
                         {/* <Link href={'/login'}> */}
                             <div className="flex flex-row items-center justify-start">
                                 <HoverCard>

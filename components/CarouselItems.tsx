@@ -17,7 +17,7 @@ import useEmblaCarousel from "embla-carousel-react"
 
 export default function CarouselItems() {
   const plugin = React.useRef(
-    Autoplay({ delay: 5000, stopOnInteraction: true })
+    Autoplay({ delay: 5000, stopOnInteraction: true})
   )
 
 
@@ -36,7 +36,7 @@ export default function CarouselItems() {
                 <CardContent>
                   <div className="flex h-96 max-w-max justify-start items-center">
 
-                    <div className="flex flex-col h-30 max-w-xl space-y-10 p-5">
+                    <div className="flex flex-col h-30 w-full justify-center lg:justify-normal space-y-10 p-5">
                       <h2 className="text-4xl text-wrap">{perks.title}</h2>
                       <p className="text-2xl text-wrap">{perks.description}</p>
                       <div>
@@ -47,7 +47,7 @@ export default function CarouselItems() {
                       </div>
                     </div>
 
-                    <div>
+                    <div className="hidden lg:block">
                       <Link href={perks.href}>
                         <Image className="invert-0 dark:invert" src={perks.image} alt={perks.title} width={1920} height={500} priority={true} />
                       </Link>
