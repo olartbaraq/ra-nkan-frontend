@@ -24,13 +24,14 @@ import { useEffect, useState } from "react";
 
 const Advert = () => {
 
-    const [isLoggedIn, setIsloggedIn] = useState<string | null>(null);
+    const [isLoggedIn, setIsloggedIn] = useState<boolean | null>(null);
 
 
     useEffect(() => {
         if (typeof window !== 'undefined' && window.localStorage) {
-            let isLoggedIn = localStorage.getItem('isloggedIn');
-            setIsloggedIn(isLoggedIn);
+            let isLoggedInString = localStorage.getItem('isloggedIn');
+            let myBool = isLoggedInString?.toLowerCase() === 'true';
+            setIsloggedIn(myBool);
         }
     
     }, [])
