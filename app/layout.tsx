@@ -4,6 +4,7 @@ import './globals.css'
 import { cn } from '@/lib/utils'
 import {Advert, Navbar} from '@/other-components'
 import { ThemeProvider } from '@/components/ThemeProvider'
+import { Toaster } from '@/components/ui/toaster'
 
 
 const alef = Alef({ subsets:['latin'], weight: "400", style: "normal", fallback: ['Monospace', 'helvetica'] })
@@ -30,7 +31,8 @@ export default function RootLayout({
         >
           <Advert />
           <Navbar />
-          {children}
+          <main>{children}</main>
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>

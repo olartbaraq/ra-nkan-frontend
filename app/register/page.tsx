@@ -1,5 +1,8 @@
 "use client";
-
+import Image from 'next/image';
+import GoogleImage from '@/public/google.jpg';
+import FacebookImage from '@/public/facebook.jpg';
+import AppleImage from '@/public/apple.jpg';
 import { MaxWidthWrapper } from "@/other-components";
 import Link from "next/link";
 import * as z from "zod"
@@ -12,9 +15,10 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { useRouter } from "next/navigation"
 import { cn } from "@/lib/utils"
-import axios, { AxiosRequestConfig } from 'axios'
+import axios, { AxiosError, AxiosRequestConfig } from 'axios'
 import { ToastAction } from "@/components/ui/toast"
 import { useToast } from "@/components/ui/use-toast"
+import { useState } from 'react';
 
 
 const registerFormSchema = z.object({
@@ -34,15 +38,17 @@ const registerFormSchema = z.object({
     }).max(50, {
         message: "Lastname must be not exit 50 characters.",
     }),
-    email: z.coerce.string({
+    email: z.string({
         required_error: "Email is required",
         invalid_type_error: "Email must be contain @ and .",
-    }).email(),
-    phone: z.coerce.string({
+    }).email({
+        message: "Email must contain @ and .",
+    }),
+    phone: z.string({
         required_error: "Phone Number is required",
         invalid_type_error: "Phone Number must be only numbers",
     }).length(11, {
-        message: "Mobile Number must be 11 characters.",
+        message: "Mobile Number must be 11 digits.",
     }),
     address: z.string({
         required_error: "Address is required",
@@ -53,10 +59,12 @@ const registerFormSchema = z.object({
     password: z.string().min(8),
 })
 
+const requiredForm = registerFormSchema.required();
+
 type RegisterUser = {
     email: string
-    firstName: string
-    lastName: string
+    firstname: string
+    lastname: string
     phone: string
     address: string
     password: string
@@ -68,13 +76,15 @@ const Register = () => {
 
     const { toast } = useToast()
 
+    const [disabled, setDisabled] = useState<boolean>(false)
+
     const GoogleOauth = () => {
         console.log('Google OAuth')
     }
 
     // 1. Define your form.
-    const form = useForm<z.infer<typeof registerFormSchema>>({
-        resolver: zodResolver(registerFormSchema),
+    const form = useForm<z.infer<typeof requiredForm>>({
+        resolver: zodResolver(requiredForm),
         defaultValues: {
             firstname: "",
             lastname: "",
@@ -86,38 +96,43 @@ const Register = () => {
     })
 
      // 2. Define a submit handler.
-    async function onSubmit(values: z.infer<typeof registerFormSchema>) {
+    async function onSubmit(values: z.infer<typeof requiredForm>) {
         // Do something with the form values.
         // ✅ This will be type-safe and validated.
-        const url = `${process.env.REGISTER_URL}`
 
         const body : RegisterUser = {
-            firstName: values.firstname,
+            firstname: values.firstname,
             email: values.email,
-            lastName: values.lastname,
+            lastname: values.lastname,
             phone: values.phone,
             address: values.address,
             password: values.password
         }
+
+        //console.log("BODY>>>",body);
         
         try {
 
-            const registerResponse = await axios.post(url, body);
-            if (registerResponse.status === 201) {
-                const data = registerResponse.data
-                console.log(data);
+            const registerResponse = await axios.post("http://127.0.0.1:8000/auth/register", body);
+            setDisabled(true);
+            if (registerResponse.data.statusCode === 201) {
+                //const data = registerResponse.data
+                //console.log("DATA>>>", data);
                 toast({
                     description: "Registration Successful.",
                 })
                 router.push(`/login`);
                 form.reset();
+            } else {
+                toast({
+                    variant: "destructive",
+                    title: "Uh oh! Something went wrong.",
+                    description: "There was a problem with your request.",
+                    action: <ToastAction altText="Try again">Try again</ToastAction>,
+                })
+                form.reset();
             }
-            toast({
-                variant: "destructive",
-                title: "Uh oh! Something went wrong.",
-                description: "There was a problem with your request.",
-                action: <ToastAction altText="Try again">Try again</ToastAction>,
-            })
+
 
             // const options: RequestInit = {
             //     method: 'GET',
@@ -132,8 +147,16 @@ const Register = () => {
             // const searchResponse = await fetch(url, options)
             // const data = await searchResponse.json();
             // console.log(data);
-        } catch (error) {
-            console.log(error)
+        } catch (error : any) {
+            console.log(error.response.data)
+            const errorBody = error.response.data;
+            toast({
+                variant: "destructive",
+                title: `${errorBody.message}`,
+                description: `${errorBody.Error}`,
+                action: <ToastAction altText="Try again">Try again</ToastAction>,
+            })
+            form.reset();
         }
     }
 
@@ -260,7 +283,7 @@ const Register = () => {
                                             </FormItem>
                                             )}
                                         />
-                                    <Button className={cn(buttonVariants({variant: 'default'}), "text-2xl h-14 rounded-full")}  type="submit">Create account</Button>
+                                    <Button disabled={disabled} className={cn(buttonVariants({variant: 'default'}), "text-2xl h-14 rounded-full", disabled ? "bg-gray-300": "default" )}  type="submit">Create account</Button>
                                 </form>
                             </Form>
 
@@ -269,17 +292,31 @@ const Register = () => {
                         <div className="relative">
                             {/* the vertival line here */}
                             <hr className="h-[800px] w-[1px] border-[1px] border-gray-700"/>
-                            <div className="absolute top-96 -right-4 h-8 w-8 border rounded-full flex items-center justify-center bg-slate-100">
-                                <p className="text-xl">or</p>
+                            <div className="absolute top-96 -right-4 h-8 w-8 border rounded-full flex items-center justify-center bg-slate-100 dark:bg-black">
+                                <p className="text-xl dark:text-slate-50">or</p>
                             </div>
                         </div>
                             
-                        <div className="relative w-full flex flex-col space-y-10">
+                        <div className="w-full flex flex-col space-y-10">
                             {/* continue with Oauth here */}
-                            <div>
-                                <Button className={cn(buttonVariants({variant: 'secondary'}), "text-2xl h-14 rounded-full")}  onClick={GoogleOauth}>Continue with Google</Button>
-                                <div className="absolute top-72 right-4">
+                            <div className='relative'>
+                                <button className="text-2xl font-bold h-16 w-96 border-black border-2 rounded-full" onClick={GoogleOauth}>Continue with Google</button>
+                                <div className="absolute top-2 right-30">
+                                    <Image src={GoogleImage} height={50} width={50} alt='google_image'/>
+                                </div>
+                            </div>
 
+                            <div className='relative'>
+                                <button className="text-2xl text-slate-100 font-bold h-16 w-96 border-black border-2 rounded-full bg-blue-600" onClick={GoogleOauth}>Continue with Facebook</button>
+                                <div className="absolute -top-3 -left-8">
+                                    <Image src={FacebookImage} height={120} width={120} alt='facebook_image'/>
+                                </div>
+                            </div>
+
+                            <div className='relative'>
+                                <button className="text-2xl font-bold h-16 w-96 border-black border-2 rounded-full" onClick={GoogleOauth}>Continue with Apple</button>
+                                <div className="absolute top-1 -left-4">
+                                    <Image className="invert-0 dark:invert" src={AppleImage} height={100} width={100} alt='apple_image'/>
                                 </div>
                             </div>
                         </div>

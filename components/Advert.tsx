@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link"
 import MaxWidthWrapper from "./MaxWidthWrapper"
 import { ChevronDown, BellRing, ShoppingCart } from "../utils/icons"
@@ -15,24 +17,44 @@ import {
 import { cn } from "@/lib/utils"
 
 import { MY_NKANS } from "@/utils/textdata/my_nkan"
+import { useEffect, useState } from "react";
+
 
 
 
 const Advert = () => {
+
+    const [isLoggedIn, setIsloggedIn] = useState<string | null>(null);
+
+
+    useEffect(() => {
+        if (typeof window !== 'undefined' && window.localStorage) {
+            let isLoggedIn = localStorage.getItem('isloggedIn');
+            setIsloggedIn(isLoggedIn);
+        }
+    
+    }, [])
+
+
+
   return (
     <div className="border-b border-gray-300">
         <MaxWidthWrapper className="py-1">
             <div className="flex flex-row justify-between h-6 w-full">
                 <div className="flex flex-row justify-normal space-x-3 items-center min-w-max">
-                        <div>Hi 
-                            <span className="text-orange-400 text-sm underline mx-2">
-                                <Link href={'/login'}>Sign In</Link>
-                            </span> 
-                            or 
-                            <span className="text-orange-400 text-sm underline mx-2">
-                                <Link href={'/register'}>Register</Link>
-                            </span>
-                        </div>
+                    {
+                        isLoggedIn ? (<p>Welcome User</p>) : (
+                            <div>Hi 
+                                <span className="text-orange-400 text-sm underline mx-2">
+                                    <Link href={'/login'}>Sign In</Link>
+                                </span> 
+                                or 
+                                <span className="text-orange-400 text-sm underline mx-2">
+                                    <Link href={'/register'}>Register</Link>
+                                </span>
+                            </div>
+                        )
+                    }
                     <h4 className="text-sm no-underline hover:underline"><Link href={'/login'}>Daily Deals</Link></h4>
 
                     <h4 className="text-sm no-underline hover:underline"><Link href={'/login'}>Help & Contact</Link></h4>
