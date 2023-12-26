@@ -15,6 +15,7 @@ type Perks = {
     call_to_action: string
     image: StaticImageData
     href: string
+    bgColor?: string
 }[]
 
 export const SITE_PERKS: Perks = [
@@ -25,7 +26,8 @@ export const SITE_PERKS: Perks = [
         description: "Effortlessly explore and acquire both tangible treasures and digital delights.",
         call_to_action: 'Choose branded items',
         image: Ilus_1,
-        href: "/"
+        href: "/",
+        bgColor: 'bg-orange-500'
     },
 
     {
@@ -35,7 +37,8 @@ export const SITE_PERKS: Perks = [
         description: "Immerse yourself in a world curated with utmost precision with expertly selected blend of physical and digital products.",
         call_to_action: "Get anything you need",
         image: Ilus_2,
-        href: "/"
+        href: "/",
+        bgColor: 'bg-amber-500'
     },
 
     {
@@ -45,7 +48,8 @@ export const SITE_PERKS: Perks = [
         description: "Experience the ease of a unified shopping journey, making your shopping experience both convenient and enjoyable.",
         call_to_action: "Just what you wanted",
         image: Ilus_3,
-        href: "/"
+        href: "/",
+        bgColor: 'bg-lime-500'
     },
 
     {
@@ -55,7 +59,9 @@ export const SITE_PERKS: Perks = [
         description: "Explore and uncover a realm of virtual delights, from software solutions to artistic masterpieces.",
         call_to_action: "Collectibles for you",
         image: Ilus_4,
-        href: "/"
+        href: "/",
+        bgColor: 'bg-emerald-500',
+        
     },
 
     {
@@ -65,6 +71,7 @@ export const SITE_PERKS: Perks = [
         description: "Offers the perfect stage to showcase your creations to a global audience.",
         call_to_action: "Timeless treasures",
         image: Ilus_5,
-        href: "/"
+        href: "/",
+        bgColor: 'bg-sky-500'
     }
 ]

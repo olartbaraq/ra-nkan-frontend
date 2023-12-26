@@ -47,7 +47,7 @@ const Navbar = () => {
 
   return (
     <MaxWidthWrapper className="border-b border-gray-300">
-      <div className='hidden sm:flex flex-row items-center justify-start space-x-10 h-20 w-full'>
+      <div className='hidden sm:flex items-center justify-start space-x-10 h-20 w-full'>
 
         <div className='ml-4 lg:ml-0'>
           <Link className="invert-0 dark:invert" href='/'><Image src={SiteLogo} alt="Ra'Nkan Logo" width={100} height={100} priority={true}/></Link>
@@ -80,7 +80,7 @@ const Navbar = () => {
                 </NavigationMenuList>
         </NavigationMenu>
 
-        <div>
+        <div className="flex-grow">
           <SearchInput />
           {/* <Input className="h-11 w-60 lg:min-w-96 2xl:w-[1000px]" type="search" onChange={(e) => setsearch(e.target.value)} placeholder="Search for anything" />
           <Button onClick={SearchProducts} type="submit">Search</Button> */}

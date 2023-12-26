@@ -70,14 +70,14 @@ const SearchInput = () => {
 
     return (
         <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="flex min-w-max items-center space-x-7">
+            <form onSubmit={form.handleSubmit(onSubmit)} className="flex w-full items-center space-x-7">
             <FormField
                 control={form.control}
                 name="input"
                 render={({ field }) => (
-                <FormItem>
+                <FormItem className="flex-grow">
                     <FormControl>
-                    <Input className="h-11 w-60 lg:min-w-96 2xl:w-[1000px]" placeholder="Search for anything..." {...field} />
+                    <Input className="h-11" placeholder="Search for anything..." {...field} />
                     </FormControl>
                     <FormMessage />
                 </FormItem>

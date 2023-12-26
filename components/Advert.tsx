@@ -34,7 +34,7 @@ const Advert = () => {
             setIsloggedIn(myBool);
         }
     
-    }, [])
+    }, [isLoggedIn])
 
 
 
