@@ -25,7 +25,7 @@ export default function CarouselItems() {
   return (
     <Carousel
       plugins={[plugin.current]}
-      className="w-full max-w-fit"
+      className="w-full"
       onMouseEnter={plugin.current.stop}
       onMouseLeave={plugin.current.reset}
     >
@@ -48,7 +48,7 @@ export default function CarouselItems() {
                         </div>
                       </div>
 
-                      <div className="hidden lg:block">
+                      <div className="hidden md:block">
                         <Link href={perks.href}>
                           <Image className="invert-0 dark:invert bg-gradient-to-b" src={perks.image} alt={perks.title} width={1920} height={500} priority={true} />
                         </Link>
@@ -61,8 +61,8 @@ export default function CarouselItems() {
           </CarouselItem>
         ))}
       </CarouselContent>
-      <CarouselPrevious />
-      <CarouselNext />
+      <CarouselPrevious className="hidden"/>
+      <CarouselNext  className="hidden" />
     </Carousel>
   )
 }

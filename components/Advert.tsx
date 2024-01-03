@@ -3,12 +3,6 @@
 import Link from "next/link"
 import MaxWidthWrapper from "./MaxWidthWrapper"
 import { ChevronDown, BellRing, ShoppingCart } from "../utils/icons"
-import {
-    Avatar,
-    AvatarFallback,
-    AvatarImage,
-  } from "@/components/ui/avatar"
-  import { Button } from "@/components/ui/button"
   import {
     HoverCard,
     HoverCardContent,
@@ -40,7 +34,7 @@ const Advert = () => {
 
   return (
     <div className="border-b border-gray-300">
-        <MaxWidthWrapper className="py-1">
+        <MaxWidthWrapper className="py-2">
             <div className="flex flex-row justify-between h-6 w-full">
                 <div className="flex flex-row justify-normal space-x-3 items-center min-w-max">
                     {
@@ -56,24 +50,24 @@ const Advert = () => {
                             </div>
                         )
                     }
-                    <h4 className="text-sm no-underline hover:underline"><Link href={'/login'}>Daily Deals</Link></h4>
+                    <h4 className="hidden md:block text-sm no-underline hover:underline"><Link href={'/login'}>Daily Deals</Link></h4>
 
-                    <h4 className="text-sm no-underline hover:underline"><Link href={'/login'}>Help & Contact</Link></h4>
+                    <h4 className="hidden md:block text-sm no-underline hover:underline"><Link href={'/login'}>Help & Contact</Link></h4>
                 </div>
 
                 <div className="flex flex-row justify-center items-center space-x-3 min-w-max">
                 
-                    <h4 className=" text-sm hidden lg:block no-underline hover:underline">
+                    <h4 className=" text-sm hidden md:block no-underline hover:underline">
                         <Link href={'/login'}>Ship to</Link>
                     </h4>
 
-                    <h4 className="text-sm no-underline hover:underline">
+                    <h4 className="hidden md:block text-sm no-underline hover:underline">
                         <Link href={'/login'}>Sell</Link>
                     </h4>
                     
                     <h4 className="text-sm no-underline hover:underline">
                         {/* <Link href={'/login'}> */}
-                            <div className="hidden lg:flex flex-row items-center justify-start">
+                            <div className="hidden md:flex flex-row items-center justify-start">
                                 <HoverCard>
                                     <HoverCardTrigger>
                                         Watchlist

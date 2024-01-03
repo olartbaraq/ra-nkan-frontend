@@ -1,5 +1,5 @@
 import { CarouselItems, MaxWidthWrapper, Categories,
-  ExploreCategories, Footer} from '@/other-components'
+  ExploreCategories, Footer, ProductsLike} from '@/other-components'
 
 export default function Home() {
 
@@ -9,6 +9,7 @@ export default function Home() {
         <Categories />
         <CarouselItems />
         <ExploreCategories />
+        <ProductsLike />
         <Footer />
       </div>
     </MaxWidthWrapper>

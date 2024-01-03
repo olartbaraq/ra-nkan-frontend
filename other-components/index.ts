@@ -7,9 +7,9 @@ import Categories from "@/components/Categories";
 import SearchInput from "@/components/SearchInput";
 import ExploreCategories from "@/components/ExploreCategories";
 import Footer from "@/components/Footer";
-
+import ProductsLike from "@/components/ProductsLike";
 
 export {
     Advert, MaxWidthWrapper, Navbar, DarkMode, CarouselItems,
-    Categories, SearchInput, ExploreCategories, Footer
+    Categories, SearchInput, ExploreCategories, Footer, ProductsLike
 }
