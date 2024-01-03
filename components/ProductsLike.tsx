@@ -10,12 +10,13 @@ import { useRouter } from "next/navigation";
 import { Button } from "./ui/button";
 import Link from "next/link";
 
-type Product = typeof PRODUCTS[number]
+// type Product = typeof PRODUCTS[number]
 
-type ProductProps = {
-	product: Product
-}
-const ProductsLike = ({product}: ProductProps) => {
+// type ProductProps = {
+// 	product: Product
+// }
+
+const ProductsLike = () => {
 
 	// const router = useRouter();
 
