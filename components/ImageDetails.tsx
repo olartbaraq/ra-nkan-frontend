@@ -5,14 +5,15 @@ import Image from 'next/image'
 
 
 type imgProps = {
-  images: any
+  images: string[],
 }
 
 const ImageDetails = ({images}:imgProps) => {
 
-  const [BigImage, setBigImage] = useState<string>(images[0])
+  const [bigImage, setBigImage] = useState<string>(images[0]);
 
   const handleBigImage = (image: string) => {
+    //alert("image chnaged");
     setBigImage(image);
   }
 
@@ -23,21 +24,35 @@ const ImageDetails = ({images}:imgProps) => {
             {/* Images */}
             <div>
               {/* Bigger image section */}
-              <Image src={BigImage} alt="product_name" width={150} height={150} className="overflow-hidden h-full w-full self-center shadow-md bg-gradient-to-b from-slate-200 to-slate-500 border rounded-md object-contain object-center"/>
+              {bigImage && (
+              <Image
+                src={bigImage}
+                alt="product_name"
+                width={150}
+                height={150}
+                className="overflow-hidden h-full w-full self-center shadow-md bg-gradient-to-b from-slate-200 to-slate-500 border rounded-md object-contain object-center"
+            />
+          )}
             </div>
 
             <div className="flex space-x-0 items-center">
               {/* grid of smaller images */}
-              {
-                images.map((image : string, index: number) => (
+              {images &&
+                images?.map((image: string, index: number) => (
                   <div key={index}>
-                    <Image onClick={() => handleBigImage(image)} src={image} alt={`product_image_${index}`}  width={70} height={70} className="overflow-hidden h-full w-full self-center border rounded-md cursor-pointer object-contain object-center"/>
+                    <Image
+                      onClick={() => handleBigImage(image)}
+                      src={image}
+                      alt={`product_image_${index}`}
+                      width={70}
+                      height={70}
+                      className="overflow-hidden h-full w-full self-center border rounded-md cursor-pointer object-contain object-center"
+                    />
                   </div>
-                ))
-              }
+              ))}
             </div>
           </div>
-        </div>
+    </div>
   )
 }
 

@@ -13,7 +13,7 @@ import { Products } from "@/typings";
 export async function getProductsData() {
 	const response = await fetch("http://127.0.0.1:8000/products/list_products", { next: { revalidate: 60 *60 * 24 } })
 	const data = await response.json();
-	//console.log(data);
+	//console.log(data.data);
 	return data.data
 
 }
@@ -39,7 +39,7 @@ export default async function ProductsLike() {
 						>
 
 							{
-								product.image_urls.slice(0,1).map((image, index) =>(
+								product.images.slice(0,1).map((image, index) =>(
 									<Image key={index} src={image} alt={product.name} height={300} width={300} className="w-56 h-48"/>
 								))
 							}

@@ -4,7 +4,7 @@ export type Products = {
     name: string
     description: string
     price: string
-    image_urls: string[]
+    images: string[]
     qty_aval: number
     shop_id: number
     shop_name: string

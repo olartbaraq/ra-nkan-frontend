@@ -22,7 +22,7 @@ const Product = async ({params: {productId} }: Props) => {
   return (
     <MaxWidthWrapper>
       <section>
-        <ImageDetails images={PRODUCTS.image_urls}/>
+        <ImageDetails images={PRODUCTS.images}/>
       </section>
     </MaxWidthWrapper>
   )
@@ -37,7 +37,7 @@ export async function getStaticData({params: {productId} }: Props) {
   }
 
   const data = await response.json();
-  //console.log(data)
+  //console.log(data.data)
   return data.data
 }
 
