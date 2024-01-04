@@ -7,12 +7,12 @@ const Categories = () => {
   return (
     <div className="hidden border-b border-gray-200 content-center w-full xl:flex justify-center">
         <div className=" flex content-center h-10 max-w-max items-center space-x-3 2xl:space-x-6 ">
-          <Link className="text-xs min-w-max mt-[2px]" href='/'>Home</Link>
-          <Link className="text-xs min-w-max flex items-center space-x-1 mt-[2px]" href='/cart'><Heart className={cn("h-3 w-3 transition-all text-muted-foreground")}/>Saved</Link>
+          <Link className="text-xs min-w-max mt-[2px] hover:text-primary" href='/'>Home</Link>
+          <Link className="text-xs min-w-max flex items-center space-x-1 mt-[2px] hover:text-primary" href='/cart'><Heart className={cn("h-3 w-3 transition-all text-muted-foreground hover:text-primary")}/>Saved</Link>
         {
           PRODUCT_CATEGORIES.map(categories => (
               <ul key={categories.label}>
-                <Link className="text-xs min-w-max" href={categories.value}>{categories.label}</Link>
+                <Link className="text-xs min-w-max hover:text-primary" href={categories.value}>{categories.label}</Link>
               </ul>
           ))
         }

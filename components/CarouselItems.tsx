@@ -38,7 +38,7 @@ export default function CarouselItems() {
                     <div className={cn("flex h-96 max-w-max justify-start items-center",perks.bgColor)}>
 
                       <div className="flex flex-col h-30 w-full justify-center lg:justify-normal space-y-10 p-5">
-                        <h2 className="text-4xl text-wrap">{perks.title}</h2>
+                        <h2 className="text-4xl text-wrap text-primary">{perks.title}</h2>
                         <p className="text-2xl text-wrap">{perks.description}</p>
                         <div>
                           <Link className="border border-black dark:border-white rounded-sm flex items-center px-6 py-2 justify-between h-50 w-80" href={perks.href}>
