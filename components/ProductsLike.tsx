@@ -1,5 +1,4 @@
 
-import { PRODUCTS } from "@/utils/textdata/fakeproducts"
 import Image from "next/image"
 import { Store } from 'lucide-react';
 import { Star } from 'lucide-react';
@@ -7,27 +6,21 @@ import { cn } from "@/lib/utils";
 import { useRouter } from "next/navigation";
 import { Button } from "./ui/button";
 import Link from "next/link";
+import { Products } from "@/typings";
 
-// type Product = typeof PRODUCTS[number]
 
-// type ProductProps = {
-// 	product: Product
-// }
 
-export async function getProducts() {
-	const resposne = await fetch("")
+export async function getProductsData() {
+	const response = await fetch("http://127.0.0.1:8000/products/list_products", { next: { revalidate: 60 *60 * 24 } })
+	const data = await response.json();
+	//console.log(data);
+	return data.data
+
 }
 
 export default async function ProductsLike() {
 
-	// const data : ProductFromApi[] = await getProductsData(); //remember this
-
-	// const router = useRouter();
-
-	// const ProductsPageHandler = () => {
-
-	// 	router.push(`/products/${product}`)
-	// }
+	const PRODUCTS : Products[] = await getProductsData();
 
 
   return (
@@ -45,22 +38,26 @@ export default async function ProductsLike() {
 							className="flex flex-col border border-gray-100 rounded-md items-center cursor-pointer"
 						>
 
-							<Image src={product.image} alt={product.description} height={300} width={300}/>
-							<div className="bg-popover flex-shrink p-5 flex flex-col space-y-2 items-start text-balance">
-								<h5 className="font-semibold">{product.name} <span className="line-clamp-2 text-sm">{product.description}</span></h5>
+							{
+								product.image_urls.slice(0,1).map((image, index) =>(
+									<Image key={index} src={image} alt={product.name} height={300} width={300} className="w-56 h-48"/>
+								))
+							}
+							<div className="bg-popover flex-shrink p-5 h-60 flex flex-col space-y-2 items-start text-balance">
+								<h5 className="font-semibold">{product.name} <span className="line-clamp-2 text-xs">{product.description}</span></h5>
 								<h3 className="font-bold text-xl">&#x20A6;{product.price}</h3>
 								<div className="flex space-x-3 w-40 items-center">
 									<Store className={cn("h-3 w-3")}/>
-									<h6 className="text-gray-300 text-sm">{product.shop}</h6>
+									<h6 className="text-gray-300 text-sm">{product.shop_name}</h6>
 								</div>
 
 								<div className="flex space-x-1 items-center">
 									<Star className={cn("text-yellow-500 h-3 w-3")}/>
-									<h6 className="text-gray-400">{product.rating}</h6>
+									<h6 className="text-gray-400">4.8</h6>
 									<hr className="w-[1px] h-5 bg-gray-300"/>
-									<h3>Sold {parseInt(product.sold) > 500 ? (
+									<h3>{(product.qty_aval) > 500 ? (
 										<span>700+</span>
-									) : (<span>{product.sold}</span>)}</h3>
+									) : (<span>{product.qty_aval}</span>)}</h3>
 								</div>
 							</div>
 						</Link>

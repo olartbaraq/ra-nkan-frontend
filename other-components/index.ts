@@ -8,8 +8,9 @@ import SearchInput from "@/components/SearchInput";
 import ExploreCategories from "@/components/ExploreCategories";
 import Footer from "@/components/Footer";
 import ProductsLike from "@/components/ProductsLike";
-
+import ImageDetails from "@/components/ImageDetails";
 export {
     Advert, MaxWidthWrapper, Navbar, DarkMode, CarouselItems,
-    Categories, SearchInput, ExploreCategories, Footer, ProductsLike
+    Categories, SearchInput, ExploreCategories, Footer, ProductsLike,
+    ImageDetails
 }
