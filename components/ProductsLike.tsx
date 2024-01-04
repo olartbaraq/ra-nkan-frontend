@@ -14,6 +14,10 @@ import Link from "next/link";
 // 	product: Product
 // }
 
+export async function getProducts() {
+	const resposne = await fetch("")
+}
+
 export default async function ProductsLike() {
 
 	// const data : ProductFromApi[] = await getProductsData(); //remember this
