@@ -20,7 +20,9 @@ import { ToastAction } from "@/components/ui/toast"
 import { useToast } from "@/components/ui/use-toast"
 import { useState } from 'react';
 // import { Circles } from 'react-loader-spinner'
-
+import { UserResponse, UserData } from '@/typings';
+import { useAppDispatch, useAppSelector } from '@/redux/storehook';
+import { updateUser,userSelector } from '@/reduxfeatures/userSlice';
 
 const loginFormSchema = z.object({
   email: z.string({
@@ -54,6 +56,9 @@ const Login = () => {
   const router = useRouter()
 
   const { toast } = useToast()
+
+  const selectedUsers = useAppSelector(userSelector);
+  const dispatch = useAppDispatch();
 
   const [disabled, setDisabled] = useState<boolean>(false)
   const [LoggedIn, setIslogged] = useState<boolean>(false)
@@ -90,8 +95,9 @@ const Login = () => {
         
           if (loginResponse.data.statusCode === 200) {
             setIslogged(true);
-            const data = loginResponse.data
-            //console.log("DATA>>>", data);
+            const data: UserResponse = loginResponse.data
+            console.log("DATA>>>", data);
+            dispatch(updateUser(data.data));
             router.push(`/`);
             form.reset();
           } else {
@@ -116,101 +122,102 @@ const Login = () => {
       }
     }
 
-    localStorage.setItem("isloggedIn", LoggedIn?.toString() ?? "");
+    // localStorage.setItem("isloggedIn", LoggedIn?.toString() ?? "");
 
 
   return (
     <MaxWidthWrapper>
-      <div className="w-full min-h-max py-10">
+      <div className="w-full py-10">
         <div className="flex items-center justify-end">
           <Link className="text-xl no-underline hover:underline text-orange-700 dark:text-orange-500" href='/survey'>Tell us what you think</Link>
         </div>
 
         <div className="flex items-center justify-center w-full mb-20">
-                <div className="flex flex-col space-y-10 items-center">
-                    <h3 className="font-bold text-4xl">Hello</h3>
-                    <p className='text-xl'>Sign in to Ra'Nkan or <span><Link className="no-underline hover:underline text-orange-700 dark:text-orange-500" href="/register">create an account</Link></span></p>
-                    <div className="flex space-x-28 items-center justify-between w-full">
-                      <div className="items-center flex w-full">
-                          {/* shadcn form component here */}
-                          <Form {...form}>
-                              <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col w-full space-y-7">
-                                <FormField
-                                  control={form.control}
-                                  name="email"
-                                  render={({ field }) => (
-                                  <FormItem>
-                                      <FormControl>
-                                        <div className="grid w-full place-self-start gap-3">
-                                          <Label htmlFor="email">Email</Label>
-                                          <Input className="border-black border-2 w-60 h-12" type="email" id="email" {...field} />
-                                        </div>
-                                      </FormControl>
-                                      <FormMessage />
-                                  </FormItem>
-                                  )}
-                                />
+          <div className="flex w-full flex-col space-y-10 items-center">
+              <h3 className="font-bold text-4xl">Hello</h3>
+              <p className='text-xl'>Sign in to Ra'Nkan or <span><Link className="no-underline hover:underline text-orange-700 dark:text-orange-500" href="/register">create an account</Link></span></p>
+              <div className="flex flex-row items-center space-x-28 w-full">
 
-                                <FormField
-                                  control={form.control}
-                                  name="password"
-                                  render={({ field }) => (
-                                  <FormItem>
-                                      <FormControl>
-                                        <div className="grid w-full place-self-start gap-3">
-                                          <Label htmlFor="password">Password</Label>
-                                          <Input className="border-black border-2 h-12" type="password" id="password" {...field} />
-                                        </div>
-                                      </FormControl>
-                                      <FormMessage />
-                                  </FormItem>
-                                  )}
-                                />
-                                <Button 
-                                  disabled={disabled} 
-                                  className={cn(buttonVariants({variant: 'default'}), 
-                                    "text-2xl h-14 rounded-full", disabled ? "bg-gray-300": null)}  
-                                  type="submit">Login</Button>
-                              </form>
-                          </Form>
+                <div className="items-center flex w-full">
+                    {/* shadcn form component here */}
+                    <Form {...form}>
+                        <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col w-full space-y-7">
+                          <FormField
+                            control={form.control}
+                            name="email"
+                            render={({ field }) => (
+                            <FormItem>
+                                <FormControl>
+                                  <div className="grid w-full place-self-start gap-3">
+                                    <Label htmlFor="email">Email</Label>
+                                    <Input className="border-black border-2 h-12" type="email" id="email" {...field} />
+                                  </div>
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                            )}
+                          />
 
-                      </div>
-
-                      <div className="relative">
-                          {/* the vertival line here */}
-                          <hr className="h-[400px] w-[1px] border-[1px] border-gray-700"/>
-                          <div className="absolute top-40 -right-4 h-8 w-8 border rounded-full flex items-center justify-center bg-slate-100 dark:bg-black">
-                              <p className="text-xl dark:text-slate-50">or</p>
-                          </div>
-                      </div>
-                          
-                      <div className="w-full flex flex-col space-y-10">
-                          {/* continue with Oauth here */}
-                          <div className='relative'>
-                              <button className="text-2xl font-bold h-16 w-96 border-black border-2 rounded-full" onClick={GoogleOauth}>Continue with Google</button>
-                              <div className="absolute top-2 right-30">
-                                  <Image src={GoogleImage} height={50} width={50} alt='google_image'/>
-                              </div>
-                          </div>
-
-                          <div className='relative'>
-                              <button className="text-2xl text-slate-100 font-bold h-16 w-96 border-black border-2 rounded-full bg-blue-600" onClick={GoogleOauth}>Continue with Facebook</button>
-                              <div className="absolute -top-3 -left-8">
-                                  <Image src={FacebookImage} height={120} width={120} alt='facebook_image'/>
-                              </div>
-                          </div>
-
-                          <div className='relative'>
-                              <button className="text-2xl font-bold h-16 w-96 border-black border-2 rounded-full" onClick={GoogleOauth}>Continue with Apple</button>
-                              <div className="absolute top-1 -left-4">
-                                  <Image className="invert-0 dark:invert" src={AppleImage} height={100} width={100} alt='apple_image'/>
-                              </div>
-                          </div>
-                      </div>
-                    </div>
+                          <FormField
+                            control={form.control}
+                            name="password"
+                            render={({ field }) => (
+                            <FormItem>
+                                <FormControl>
+                                  <div className="grid w-full place-self-start gap-3">
+                                    <Label htmlFor="password">Password</Label>
+                                    <Input className="border-black border-2 h-12" type="password" id="password" {...field} />
+                                  </div>
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                            )}
+                          />
+                          <Button 
+                            disabled={disabled} 
+                            className={cn(buttonVariants({variant: 'default'}), 
+                              "text-2xl h-14 rounded-full", disabled ? "bg-gray-300": null)}  
+                            type="submit">Login</Button>
+                        </form>
+                    </Form>
 
                 </div>
-            </div>
+
+                <div className="relative">
+                    {/* the vertival line here */}
+                    <hr className="h-[400px] w-[1px] border-[1px] border-gray-700"/>
+                    <div className="absolute top-40 -right-4 h-8 w-8 border rounded-full flex items-center justify-center bg-slate-100 dark:bg-black">
+                        <p className="text-xl dark:text-slate-50">or</p>
+                    </div>
+                </div>
+                    
+                <div className="w-full flex flex-col space-y-10">
+                    {/* continue with Oauth here */}
+                    <div className='relative'>
+                        <button className="text-2xl font-bold h-16 w-96 border-black border-2 rounded-full" onClick={GoogleOauth}>Continue with Google</button>
+                        <div className="absolute top-2 right-30">
+                            <Image src={GoogleImage} height={50} width={50} alt='google_image'/>
+                        </div>
+                    </div>
+
+                    <div className='relative'>
+                        <button className="text-2xl text-slate-100 font-bold h-16 w-96 border-black border-2 rounded-full bg-blue-600" onClick={GoogleOauth}>Continue with Facebook</button>
+                        <div className="absolute -top-3 -left-8">
+                            <Image src={FacebookImage} height={120} width={120} alt='facebook_image'/>
+                        </div>
+                    </div>
+
+                    <div className='relative'>
+                        <button className="text-2xl font-bold h-16 w-96 border-black border-2 rounded-full" onClick={GoogleOauth}>Continue with Apple</button>
+                        <div className="absolute top-1 -left-4">
+                            <Image className="invert-0 dark:invert" src={AppleImage} height={100} width={100} alt='apple_image'/>
+                        </div>
+                    </div>
+                </div>
+              </div>
+
+          </div>
+        </div>
 
       </div>
     </MaxWidthWrapper>

@@ -1,6 +1,6 @@
 
 
-import { MaxWidthWrapper, ImageDetails } from "@/other-components"
+import { MaxWidthWrapper, ImageDetails, ProductDescription, CartBox } from "@/other-components"
 import { Products } from "@/typings";
 
 
@@ -21,9 +21,18 @@ const Product = async ({params: {productId} }: Props) => {
 
   return (
     <MaxWidthWrapper>
-      <section>
-        <ImageDetails images={PRODUCTS.images}/>
-      </section>
+      <main>
+        <section className="py-10 border-b border-gray-200 flex space-x-5 items-center w-full">
+          <ImageDetails images={PRODUCTS.images}/>
+          <ProductDescription {...PRODUCTS}/>
+          <CartBox qty={PRODUCTS.qty_aval} name={PRODUCTS.name} price={PRODUCTS.price}/>
+        </section>
+
+        <section>
+
+        </section>
+
+      </main>
     </MaxWidthWrapper>
   )
 }

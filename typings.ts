@@ -1,7 +1,7 @@
 
 export type Products = {
     id: number
-    name: string
+    name: string;
     description: string
     price: string
     images: string[]
@@ -15,3 +15,25 @@ export type Products = {
     created_at: string
     updated_at: string
 };
+
+
+export type UserData = {
+    id: number
+    lastname: string
+    firstname: string
+    phone: string
+    address: string
+    email: string
+    isLoggedIn: boolean
+    is_admin: boolean
+    created_at: string
+    updated_at: string
+}
+
+export type UserResponse = {
+    data: UserData
+    message: string
+    status: string
+    statusCode: number
+    token: string
+}

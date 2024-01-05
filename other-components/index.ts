@@ -9,8 +9,14 @@ import ExploreCategories from "@/components/ExploreCategories";
 import Footer from "@/components/Footer";
 import ProductsLike from "@/components/ProductsLike";
 import ImageDetails from "@/components/ImageDetails";
+import ProductDescription from "@/components/ProductDescription";
+import CartBox from "@/components/CartBox";
+
+
+
+
 export {
     Advert, MaxWidthWrapper, Navbar, DarkMode, CarouselItems,
     Categories, SearchInput, ExploreCategories, Footer, ProductsLike,
-    ImageDetails
+    ImageDetails, ProductDescription, CartBox
 }
