@@ -5,14 +5,12 @@ import { UserData } from "@/typings";
 
 const initialState: UserData =
     {
-      id: 0,
       lastname: "",
       firstname: "",
       phone: "",
       address: "",
       email: "",
-      isLoggedIn: false,
-      is_admin: false,
+      isLoggedIn: "false",
       created_at: "",
       updated_at: "",
     }
@@ -22,21 +20,24 @@ export const userSlice = createSlice({
     initialState,
     reducers: {
         updateUser: (state: any, action: PayloadAction<UserData>) => {
-          state.id = (action.payload.id);
           state.email = (action.payload.email);
           state.lastname = (action.payload.lastname);
           state.firstname = (action.payload.firstname);
           state.address = (action.payload.address);
           state.phone = (action.payload.phone);
-          state.is_admin = (action.payload.is_admin);
           state.isLoggedIn = (action.payload.isLoggedIn);
         },
-        resetUser: (state: any, action: PayloadAction<UserData>) => {
-          initialState
+        resetUser: (state: any) => {
+          state.email = initialState.email;
+          state.lastname = initialState.lastname
+          state.firstname = (initialState.firstname);
+          state.address = (initialState.address);
+          state.phone = (initialState.phone);
+          state.isLoggedIn = (initialState.isLoggedIn);
         },
     },
 });
 
 export const { updateUser, resetUser } = userSlice.actions;
-export const userSelector = (state: RootState) => state.userReducer;
+export const userSelector = (state: RootState) => state.users;
 export default userSlice.reducer;

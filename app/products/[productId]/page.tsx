@@ -25,7 +25,9 @@ const Product = async ({params: {productId} }: Props) => {
         <section className="py-10 border-b border-gray-200 flex space-x-5 items-center w-full">
           <ImageDetails images={PRODUCTS.images}/>
           <ProductDescription {...PRODUCTS}/>
-          <CartBox qty={PRODUCTS.qty_aval} name={PRODUCTS.name} price={PRODUCTS.price}/>
+          <CartBox qty_aval={PRODUCTS.qty_aval} name={PRODUCTS.name} price={PRODUCTS.price}
+          id={PRODUCTS.id} description={PRODUCTS.description} shop_name={PRODUCTS.shop_name}
+          image={PRODUCTS.images[0]} category_name={PRODUCTS.category_name} sub_category_name={PRODUCTS.sub_category_name}/>
         </section>
 
         <section>

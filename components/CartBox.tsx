@@ -1,31 +1,63 @@
 "use client";
 
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import { Check, Minus, Plus, ShoppingBasketIcon, X } from 'lucide-react'
-import { Button } from './ui/button';
+import { Button, buttonVariants } from './ui/button';
+import { addItem } from "@/reduxfeatures/itemSlice";
+import { useAppDispatch } from "@/redux/storehook";
+import { Product } from '@/typings';
+import { cn } from '@/lib/utils';
+import { useRouter } from 'next/navigation';
 
-type Quantity = {
-  name: string
-  qty : number
-  price: string
-}
 
-const CartBox = ({name, qty, price}: Quantity) => {
+const CartBox = ({id, name, qty_aval, price, image, description,shop_name, sub_category_name, category_name}: Product) => {
 
-  const[count, setCount] = useState<number>(0);
+  const[count, setCount] = useState<number>(1);
+  const[disabled, setDisabled] = useState<boolean>(false);
+  const dispatch = useAppDispatch();
+  const router = useRouter();
 
+  useEffect(() => {
+    if (count == 0) {
+      setDisabled(true);
+    }
+
+    if (count === qty_aval) {
+      setDisabled(true);
+    }
+  }, [count])
+  
+  
   const DecrementCount = (count: number): void => {
-    if (count === 0) {
+    if (count == 0) {
       return;
     }
+    setDisabled(false);
     setCount(count - 1 );
   }
 
   const IncrementCount = (count: number): void => {
-    if (count === qty) {
+    if (count === qty_aval) {
       return;
     }
+    setDisabled(false);
     setCount(count + 1 );
+  }
+
+  const addtoCartHandler = () => {
+    const product = {
+      id,
+      name,
+      count,
+      price,
+      image,
+      shop_name,
+      sub_category_name,
+      description,
+      category_name,
+    }
+
+    dispatch(addItem(product));
   }
 
   return (
@@ -34,7 +66,7 @@ const CartBox = ({name, qty, price}: Quantity) => {
       <div className='flex w-full justify-between items-center border-b border-gray-200'>
         <h3 className='text-lg font-bold text-wrap'>{name}</h3>
         {
-          qty > 0 ? (
+          qty_aval > 0 ? (
             <div className='flex gap-x-1'>
               <h3 className='text-lg font-semibold'>In Stock</h3>
               <Check className='w-7 h-7 text-primary'/>
@@ -74,16 +106,23 @@ const CartBox = ({name, qty, price}: Quantity) => {
 
       {/* Add to cart */}
         {/* button sends data to redux */}
-      <button className='flex space-x-2 text-center items-center p-2 w-full justify-center border-orange-600 border rounded-xl'>
-        <ShoppingBasketIcon className='w-7 h-7 text-primary'/>
-        <h2 className='text-primary font-semibold text-xl'>Add to Cart</h2>
-      </button>
+      <Button 
+        disabled={disabled} 
+        className={cn(buttonVariants({variant: 'default'}), 
+        "text-2xl h-14 w-full rounded-full", disabled ? "bg-gray-300": null)}  
+        onClick={addtoCartHandler}>
+        <ShoppingBasketIcon className={cn(disabled ? 'text-gray-600' : 'w-7 h-7 text-secondary')}/>
+          <h2 className={cn( disabled ? 'text-gray-600' : 'text-secondary font-semibold text-xl')}>Add to Cart</h2>
+      </Button>
 
       {/* Buy Now */}
       {/* button send order to order page  */}
-      <Button className="w-full" size={'lg'} variant={'default'}>Buy Now</Button>
     </div>
   )
 }
 
+        // <Button disabled={disabled} className='w-full gap-x-2' size={"lg"} variant={"default"} onClick={addtoCartHandler}>
+        //   <ShoppingBasketIcon className={cn(disabled ? 'text-gray-600' : 'w-7 h-7 text-secondary')}/>
+        //   <h2 className={cn( disabled ? 'text-gray-600' : 'text-secondary font-semibold text-xl')}>Add to Cart</h2>
+        // </Button>
 export default CartBox

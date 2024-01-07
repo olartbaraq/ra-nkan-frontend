@@ -57,14 +57,14 @@ const Login = () => {
 
   const { toast } = useToast()
 
-  const selectedUsers = useAppSelector(userSelector);
+  //const selectedUsers = useAppSelector(userSelector);
   const dispatch = useAppDispatch();
 
   const [disabled, setDisabled] = useState<boolean>(false)
-  const [LoggedIn, setIslogged] = useState<boolean>(false)
+
 
   const GoogleOauth = () => {
-      console.log('Google OAuth')
+    console.log('Google OAuth')
   }
 
   // 1. Define your form.
@@ -94,10 +94,11 @@ const Login = () => {
           setDisabled(true);
         
           if (loginResponse.data.statusCode === 200) {
-            setIslogged(true);
             const data: UserResponse = loginResponse.data
-            console.log("DATA>>>", data);
-            dispatch(updateUser(data.data));
+            //console.log("DATA>>>", data);
+            const user: UserData = data.data;
+            dispatch(updateUser(user));
+            //console.log(user)
             router.push(`/`);
             form.reset();
           } else {

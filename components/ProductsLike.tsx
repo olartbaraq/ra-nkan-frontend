@@ -39,7 +39,7 @@ export default async function ProductsLike() {
 						>
 
 							{
-								product.images.slice(0,1).map((image, index) =>(
+								product.images.slice(0,1).map((image:string, index:number) =>(
 									<Image key={index} src={image} alt={product.name} height={300} width={300} className="w-56 h-48"/>
 								))
 							}

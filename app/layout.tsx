@@ -8,8 +8,8 @@ import {Advert, Navbar, Footer} from '@/other-components'
 import { ThemeProvider } from '@/components/ThemeProvider'
 import { Toaster } from '@/components/ui/toaster'
 import { Provider } from 'react-redux'
-import { Store } from '../redux/store'
-
+import { Store, persistor } from '../redux/store'
+import { PersistGate } from 'redux-persist/integration/react';
 
 const alef = Alef({ subsets:['latin'], weight: "400", style: "normal", fallback: ['Monospace', 'helvetica'] })
 // const inter = Inter({ subsets: ['latin'] })
@@ -34,10 +34,12 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <Provider store={Store}>
-            <Advert />
-            <Navbar />
-            <main>{children}</main>
-            <Footer />
+            <PersistGate persistor={persistor}>
+              <Advert />
+              <Navbar />
+              <main>{children}</main>
+              <Footer />
+            </PersistGate>
           </Provider>
           <Toaster />
         </ThemeProvider>

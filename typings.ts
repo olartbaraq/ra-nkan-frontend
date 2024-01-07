@@ -1,4 +1,28 @@
 
+export type Product = {
+    id: number;
+    name: string;
+    description: string
+    price: string
+    image: string
+    qty_aval: number
+    shop_name: string
+    category_name: string
+    sub_category_name: string
+};
+
+export type Item = {
+    id: number;
+    name: string;
+    description: string
+    price: string
+    image: string
+    count: number
+    shop_name: string
+    category_name: string
+    sub_category_name: string
+};
+
 export type Products = {
     id: number
     name: string;
@@ -17,15 +41,14 @@ export type Products = {
 };
 
 
+
 export type UserData = {
-    id: number
     lastname: string
     firstname: string
     phone: string
     address: string
     email: string
-    isLoggedIn: boolean
-    is_admin: boolean
+    isLoggedIn: string
     created_at: string
     updated_at: string
 }
