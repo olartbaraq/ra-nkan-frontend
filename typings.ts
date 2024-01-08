@@ -16,6 +16,7 @@ export type Item = {
     name: string;
     description: string
     price: string
+    totalPrice: string
     image: string
     count: number
     shop_name: string

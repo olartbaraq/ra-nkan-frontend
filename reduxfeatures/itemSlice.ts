@@ -10,6 +10,7 @@ const initialState: Item[] = [
     name: "",
     description: "",
     price: "",
+    totalPrice: "",
     image: "",
     count: 1,
     shop_name: "",
@@ -33,9 +34,20 @@ export const itemSlice = createSlice({
           state.splice(index, 1);
         }
       },
+      updateItem: (state: Item[], action:PayloadAction<Item>) => {
+        const index = state.findIndex((item: Item) => item.id === action.payload.id);
+
+        if (index !== -1) {
+          // If the item is found, replace it with the updated item
+          state[index] = action.payload;
+        }
+      },
+      clearItems: (state: Item[]) => {
+        state.splice(0, state.length);
+      }
     },
 });
 
-export const { addItem, removeItem } = itemSlice.actions;
+export const { addItem, removeItem, clearItems, updateItem } = itemSlice.actions;
 export const itemSelector = (state: RootState) => state.items;
 export default itemSlice.reducer;

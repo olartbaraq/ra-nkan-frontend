@@ -23,7 +23,7 @@ import { cn } from "@/lib/utils"
 import { MY_NKANS } from "@/utils/textdata/my_nkan"
 import { useEffect, useState } from "react";
 import { userSelector, resetUser } from '@/reduxfeatures/userSlice';
-import { itemSelector, removeItem } from "@/reduxfeatures/itemSlice";
+import { clearItems, itemSelector, removeItem } from "@/reduxfeatures/itemSlice";
 import { useAppSelector, useAppDispatch } from "@/redux/storehook";
 import { Item, UserData } from "@/typings";
 import { Button } from "./ui/button";
@@ -61,6 +61,7 @@ const Advert = () => {
 
     const LogoutHandler = () => {
       dispatch(resetUser());
+			dispatch(clearItems());
       //console.log(user);
     }
 
@@ -209,31 +210,22 @@ const Advert = () => {
                                                           </div>
                                                         </div>
 
-                                                        <h2 className="font-bold text-xl">&#x20A6;{parseFloat(item.price) * item.count}</h2>
+                                                        <h2 className="font-bold text-xl">&#x20A6;{parseFloat(item.totalPrice).toFixed(2)}</h2>
                                                     </div>
                                                 ))
                                             }
                                     </div>
                                     <SheetFooter className="w-full">
                                         <SheetClose asChild>
-                                            {
-                                                user?.isLoggedIn === "true" ? (
-                                                    <Link className="w-full self-center " href={'/order'}>
-                                                        <Button variant="default" type="submit" className="w-full text-lg h-10 justify-center items-center">Continue</Button>
-                                                    </Link>
-                                                ) : 
-                                                (
-                                                    <Link className="w-full self-center" href={'/login'}>
-                                                        <Button variant="default" type="submit" className="w-full text-lg justify-center items-center">Login</Button>
-                                                    </Link>
-                                                )
-                                            }
+																					<Link className="w-full self-center " href={'/checkout'}>
+																						<Button variant="default" type="submit" className="w-full text-lg h-10 justify-center items-center">Continue</Button>
+																					</Link>
                                         </SheetClose>
                                     </SheetFooter>
                                 </>
                             ) : (
-                                <div className="self-center space-y-10 items-center w-full flex flex-col">
-                                  <Image src={'/emptycart.png'} alt="empty cart" height={300} width={300} className="w-full h-full"/>
+                                <div className="self-center space-y-4 items-center w-full flex flex-col">
+                                  <Image src={'/emptycart.png'} alt="empty cart" height={200} width={200} />
                                   <h3 className="text-primary text-2xl font-bold">Cart is Empty...</h3>
                                 </div>
                             )}

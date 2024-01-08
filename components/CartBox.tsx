@@ -44,12 +44,16 @@ const CartBox = ({id, name, qty_aval, price, image, description,shop_name, sub_c
     setCount(count + 1 );
   }
 
+  const newPrice = parseFloat(price) * count;
+  const stringNewPrice = newPrice.toString();
+
   const addtoCartHandler = () => {
     const product = {
       id,
       name,
       count,
       price,
+      totalPrice: stringNewPrice,
       image,
       shop_name,
       sub_category_name,
@@ -101,7 +105,7 @@ const CartBox = ({id, name, qty_aval, price, image, description,shop_name, sub_c
       {/* Subtotal */}
       <div className='flex w-full justify-between items-center'>
         <h2 className='text-xl font-semibold'>Subtotal</h2>
-        <h3 className="font-bold text-xl">&#x20A6;{parseFloat(price) * count}</h3>
+        <h3 className="font-bold text-xl">&#x20A6;{(parseFloat(price) * count).toFixed(2)}</h3>
       </div>
 
       {/* Add to cart */}
