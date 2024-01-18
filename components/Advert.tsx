@@ -38,21 +38,6 @@ const Advert = () => {
     const items = useAppSelector(itemSelector);
     const [user, setUser] = useState<UserData>();
 
-    //const[count, setCount] = useState<number>(1);
-
-
-  // const DecrementCount = (count: number): void => {
-  //   if (count === 0) {
-  //     return;
-  //   }
-  //   setCount(count - 1 );
-  // }
-
-  // const IncrementCount = (count: number): void => {
-  //   setCount(count + 1 );
-  // }
-
-
     useEffect(() => {
       setUser(LoggedInUser);
       //console.log(LoggedInUser);
@@ -60,7 +45,7 @@ const Advert = () => {
 
 
     const LogoutHandler = () => {
-      dispatch(resetUser());
+			dispatch(resetUser());
 			dispatch(clearItems());
       //console.log(user);
     }
@@ -195,31 +180,31 @@ const Advert = () => {
                             {items.length > 0 ? (
                                 <>
                                     <div className="flex flex-col space-y-2 items-center w-full mb-5">
-                                            {
-                                                items.map(item => (
-                                                    <div key={item.id} className="border-b border-gray-300 flex flex-row w-full items-center justify-between">
-                                                        <div className="flex flex-row items-start space-x-5 py-3">
-                                                          <Button variant={"outline"} size={"sm"} onClick={() => removeItemFromBasket(item)}>
-                                                            <Trash2 className="w-5 h-5 text-primary"/>
-                                                          </Button>
-                                                          <Image src={item.image} alt={item.sub_category_name} height={30} width={30} priority/>
-                                                          <div className="flex flex-col items-start justify-center space-y-1 w-full">
-                                                            <h2 className="line-clamp-1 leading-relaxed ">{item.description}</h2>
-                                                            {
-                                                            item.count > 1 ? (<h2 className="text-gray-300">{item.count} items</h2>) : (<h2 className="text-gray-300">{item.count} item</h2>)}
-                                                          </div>
-                                                        </div>
+																			{
+																					items.map(item => (
+																							<div key={item.id} className="border-b border-gray-300 flex flex-row w-full items-center justify-between">
+																									<div className="flex flex-row items-start space-x-5 py-3">
+																										<Button variant={"outline"} size={"sm"} onClick={() => removeItemFromBasket(item)}>
+																											<Trash2 className="w-5 h-5 text-primary"/>
+																										</Button>
+																										<Image src={item.image} alt={item.sub_category_name} height={30} width={30} priority/>
+																										<div className="flex flex-col items-start justify-center space-y-1 w-full">
+																											<h2 className="line-clamp-1 leading-relaxed ">{item.description}</h2>
+																											{
+																											item.count > 1 ? (<h2 className="text-gray-300">{item.count} items</h2>) : (<h2 className="text-gray-300">{item.count} item</h2>)}
+																										</div>
+																									</div>
 
-                                                        <h2 className="font-bold text-xl">&#x20A6;{parseFloat(item.totalPrice).toFixed(2)}</h2>
-                                                    </div>
-                                                ))
-                                            }
+																									<h2 className="font-bold text-xl">&#x20A6;{parseFloat(item.totalPrice).toFixed(2)}</h2>
+																							</div>
+																					))
+																			}
                                     </div>
                                     <SheetFooter className="w-full">
                                         <SheetClose asChild>
-																					<Link className="w-full self-center " href={'/checkout'}>
-																						<Button variant="default" type="submit" className="w-full text-lg h-10 justify-center items-center">Continue</Button>
-																					</Link>
+                                            <Link className="w-full self-center " href={'/checkout'}>
+                                                <Button variant="default" type="submit" className="w-full text-lg h-10 justify-center items-center">Continue</Button>
+                                            </Link>
                                         </SheetClose>
                                     </SheetFooter>
                                 </>

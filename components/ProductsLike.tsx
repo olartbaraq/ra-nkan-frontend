@@ -3,15 +3,13 @@ import Image from "next/image"
 import { Store } from 'lucide-react';
 import { Star } from 'lucide-react';
 import { cn } from "@/lib/utils";
-import { useRouter } from "next/navigation";
-import { Button } from "./ui/button";
 import Link from "next/link";
 import { Products } from "@/typings";
 
 
 
 export async function getProductsData() {
-	const response = await fetch("http://127.0.0.1:8000/products/list_products", { next: { revalidate: 60 *60 * 24 } })
+	const response = await fetch("http://127.0.0.1:8000/products/list_products", { next: { revalidate: 60 } })
 	const data = await response.json();
 	//console.log(data.data);
 	return data.data
@@ -44,18 +42,19 @@ export default async function ProductsLike() {
 								))
 							}
 							<div className="bg-popover flex-shrink p-5 h-60 flex flex-col space-y-2 items-start text-balance">
-								<h5 className="font-semibold">{product.name} <span className="line-clamp-2 text-xs">{product.description}</span></h5>
+								<h5 className="font-semibold line-clamp-2 leading-tight">{product.name}</h5>
+								<span className="line-clamp-3 text-xs">{product.description}</span>
 								<h3 className="font-bold text-xl">&#x20A6;{product.price}</h3>
 								<div className="flex space-x-3 w-40 items-center">
 									<Store className={cn("h-3 w-3")}/>
-									<h6 className="text-gray-300 text-sm">{product.shop_name}</h6>
+									<h6 className="text-gray-700 text-sm">{product.shop_name}</h6>
 								</div>
 
 								<div className="flex space-x-1 items-center">
 									<Star className={cn("text-yellow-500 h-3 w-3")}/>
-									<h6 className="text-gray-400">4.8</h6>
+									<h6 className="text-gray-600">4.8</h6>
 									<hr className="w-[1px] h-5 bg-gray-300"/>
-									<h3>{(product.qty_aval) > 500 ? (
+									<h3 className="text-primary text-xl">{(product.qty_aval) > 500 ? (
 										<span>700+</span>
 									) : (<span>{product.qty_aval}</span>)}</h3>
 								</div>

@@ -1,4 +1,5 @@
 
+
 export type Product = {
     id: number;
     name: string;
@@ -60,4 +61,27 @@ export type UserResponse = {
     status: string
     statusCode: number
     token: string
+}
+
+export type Paginations = {
+    Page: number
+    Limit: number
+}
+
+export type Shipping = {
+    lastname: string
+    firstname: string
+    phone: string
+    address: string
+    city: string
+    state: string
+    postal_code: string
+    country: string
+}
+
+export type PaystackConfig = {
+    reference: string
+    email: string
+    amount: number  // amount must be in Kobo
+    publicKey: string
 }

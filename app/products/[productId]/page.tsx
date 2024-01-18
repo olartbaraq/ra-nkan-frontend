@@ -40,7 +40,7 @@ const Product = async ({params: {productId} }: Props) => {
 }
 
 export async function getStaticData({params: {productId} }: Props) {
-  const response = await fetch(`http://127.0.0.1:8000/products/get_product_by_id?id=${productId}`, { cache: 'force-cache' })
+  const response = await fetch(`http://127.0.0.1:8000/products/get_product_by_id?id=${productId}`, { next: { revalidate: 60 * 60 * 24 } })
 
   if (!response.ok) {
     // This will activate the closest `error.js` Error Boundary

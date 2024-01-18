@@ -24,7 +24,20 @@ export const itemSlice = createSlice({
     initialState,
     reducers: {
       addItem: (state: Item[], action: PayloadAction<Item>) => {
-        state.push(action.payload);
+        const newItem = action.payload;
+        const index = state.findIndex((item: Item) => item.id === newItem.id);
+
+        if (index !== -1) {
+          state[index].count += newItem.count;
+          const currentTotalPrice = parseFloat(state[index].totalPrice);
+          const newTotalPrice = parseFloat(newItem.totalPrice);
+          const updatedTotalPrice = currentTotalPrice + newTotalPrice
+
+          state[index].totalPrice += newItem.totalPrice;
+          state[index].totalPrice = updatedTotalPrice.toString();
+        } else {
+          state.push(newItem);
+        }
       },
       removeItem: (state: Item[], action: PayloadAction<Item>) => {
         const index = state.findIndex((item: Item) => item.id === action.payload.id);

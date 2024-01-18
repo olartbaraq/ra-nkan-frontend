@@ -4,52 +4,28 @@ import { MaxWidthWrapper } from '@/other-components'
 import { itemSelector, removeItem, updateItem } from "@/reduxfeatures/itemSlice";
 import { useAppSelector, useAppDispatch } from "@/redux/storehook";
 import { Item, UserData } from "@/typings";
-import { useRouter } from 'next/navigation';
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm } from "react-hook-form"
-import * as z from "zod"
 import { Button, buttonVariants } from "@/components/ui/button"
-import { Checkbox } from "@/components/ui/checkbox"
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form"
 import { useEffect, useState } from 'react';
 import { Minus, Plus, Trash2 } from 'lucide-react';
-import { userSelector } from '@/reduxfeatures/userSlice';
 import { cn } from '@/lib/utils';
+import Link from 'next/link';
 
 type GroupedItems = { [shopName: string]: Item[] };
 
 
 const Checkout = () => {
 
-  const router = useRouter();
   const dispatch = useAppDispatch();
   const items = useAppSelector(itemSelector);
-  const LoggedInUser = useAppSelector(userSelector);
   const [itemCounts, setItemCounts] = useState<{ [itemId: number]: number }>({});
-  //const [count, setCount] = useState<number>(1);
-  const [user, setUser] = useState<UserData>();
 
-  useEffect(() => {
-    setUser(LoggedInUser);
-  
+  useEffect(() => { 
     const initialCounts = items.reduce((acc, item) => {
       acc[item.id] = item.count;
       return acc;
     }, {} as { [itemId: number]: number });
     setItemCounts(initialCounts);
-  }, [LoggedInUser, items])
-
-  if (user?.isLoggedIn == "false") {
-    router.push('/login');
-  }
+  }, [items])
 
 
   const updateDecrementCount = (itemId: number): void => {
@@ -162,7 +138,7 @@ const Checkout = () => {
           {/* Render items based on shop name */}
           <div>
           {Object.keys(groupedItems).map((shopName) => (
-            <div key={shopName} className='font-bold text-sm flex flex-col space-y-2 px-5'>
+            <div key={shopName} className='font-bold text-sm flex flex-col space-y-2 mb-10 px-5'>
               <h2>{shopName}</h2>
               {groupedItems[shopName].map(renderItem)}
             </div>
@@ -191,8 +167,10 @@ const Checkout = () => {
             <h3 className='text-gray-500 text-lg'>Total</h3>
             <p className='font-semibold text-2xl'>&#x20A6;{overallTotal.toFixed(2)}</p>
           </div>
-          <Button  className={cn(buttonVariants({variant: 'default'}), 
-        "text-2xl h-14 w-full rounded-full",)}>Buy Now</Button>
+          <Link href={'/information'}>
+            <Button className={cn(buttonVariants({variant: 'default'}), 
+              "text-2xl h-14 w-full rounded-full",)}>Buy Now</Button>
+          </Link>
         </div>
       </div>
     </MaxWidthWrapper>

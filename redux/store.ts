@@ -1,6 +1,7 @@
 import { PreloadedState, combineReducers, configureStore } from '@reduxjs/toolkit';
 import userReducer from '../reduxfeatures/userSlice'
 import itemReducer from '../reduxfeatures/itemSlice'
+import shippingReducer from '@/reduxfeatures/ShippingAdress';
 import storage from 'redux-persist/lib/storage';
 import { persistReducer, persistStore } from 'redux-persist';
 import autoMergeLevel2 from 'redux-persist/es/stateReconciler/autoMergeLevel2';
@@ -14,6 +15,7 @@ const persistConfig = {
 const rootReducer = combineReducers({
   users: userReducer,
   items: itemReducer,
+  shipping: shippingReducer
   // auth: authReducer,
   // userProfile: userProfileReducer
 });
@@ -39,6 +41,7 @@ export const createPreloadedState = (
 	return {
 		users: { ...Store.getState().users, ...customState.users },
 		items: { ...Store.getState().items, ...customState.items },
+		shipping: { ...Store.getState().items, ...customState.shipping },
 	};
 };
 

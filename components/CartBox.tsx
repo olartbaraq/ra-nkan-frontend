@@ -8,7 +8,8 @@ import { useAppDispatch } from "@/redux/storehook";
 import { Product } from '@/typings';
 import { cn } from '@/lib/utils';
 import { useRouter } from 'next/navigation';
-
+import { ToastAction } from "@/components/ui/toast"
+import { useToast } from "@/components/ui/use-toast"
 
 const CartBox = ({id, name, qty_aval, price, image, description,shop_name, sub_category_name, category_name}: Product) => {
 
@@ -16,6 +17,7 @@ const CartBox = ({id, name, qty_aval, price, image, description,shop_name, sub_c
   const[disabled, setDisabled] = useState<boolean>(false);
   const dispatch = useAppDispatch();
   const router = useRouter();
+  const { toast } = useToast()
 
   useEffect(() => {
     if (count == 0) {
@@ -62,6 +64,12 @@ const CartBox = ({id, name, qty_aval, price, image, description,shop_name, sub_c
     }
 
     dispatch(addItem(product));
+    toast({
+      variant: "default",
+      title: `item added to cart`,
+      description: "You can continue shopping or checkout",
+      action: <ToastAction altText="OK">OK</ToastAction>,
+    });
   }
 
   return (
