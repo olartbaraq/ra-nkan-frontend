@@ -1,34 +1,30 @@
-"use client";
 
-
-import { PRODUCTS } from "@/utils/textdata/fakeproducts"
 import Image from "next/image"
 import { Store } from 'lucide-react';
 import { Star } from 'lucide-react';
 import { cn } from "@/lib/utils";
-import { useRouter } from "next/navigation";
-import { Button } from "./ui/button";
 import Link from "next/link";
+import { Products } from "@/typings";
 
-type Product = typeof PRODUCTS[number]
 
-type ProductProps = {
-	product: Product
+
+export async function getProductsData() {
+	const response = await fetch("http://127.0.0.1:8000/products/list_products", { next: { revalidate: 60 } })
+	const data = await response.json();
+	//console.log(data.data);
+	return data.data
+
 }
-const ProductsLike = ({product}: ProductProps) => {
 
-	// const router = useRouter();
+export default async function ProductsLike() {
 
-	// const ProductsPageHandler = () => {
-
-	// 	router.push(`/products/${product}`)
-	// }
+	const PRODUCTS : Products[] = await getProductsData();
 
 
   return (
     <div className="flex flex-col space-y-10 items-center justify-center md:justify-normal w-full">
       <div className="w-full flex justify-center md:justify-normal mt-10">
-				<h3 className="font-bold md:text-3xl">Products you may like</h3>
+				<h3 className="font-bold md:text-3xl text-primary">Products you may like</h3>
 			</div>
 
 			<div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-1 md:gap-5 w-full items-center">
@@ -40,22 +36,27 @@ const ProductsLike = ({product}: ProductProps) => {
 							className="flex flex-col border border-gray-100 rounded-md items-center cursor-pointer"
 						>
 
-							<Image src={product.image} alt={product.description} height={300} width={300}/>
-							<div className="p-5 flex flex-col space-y-2 items-start text-balance">
-								<h5 className="font-semibold">{product.name} <span className="line-clamp-2 text-sm">{product.description}</span></h5>
+							{
+								product.images.slice(0,1).map((image:string, index:number) =>(
+									<Image key={index} src={image} alt={product.name} height={300} width={300} className="w-56 h-48"/>
+								))
+							}
+							<div className="bg-popover flex-shrink p-5 h-60 flex flex-col space-y-2 items-start text-balance">
+								<h5 className="font-semibold line-clamp-2 leading-tight">{product.name}</h5>
+								<span className="line-clamp-3 text-xs">{product.description}</span>
 								<h3 className="font-bold text-xl">&#x20A6;{product.price}</h3>
 								<div className="flex space-x-3 w-40 items-center">
 									<Store className={cn("h-3 w-3")}/>
-									<h6 className="text-gray-300 text-sm">{product.shop}</h6>
+									<h6 className="text-gray-700 text-sm">{product.shop_name}</h6>
 								</div>
 
 								<div className="flex space-x-1 items-center">
 									<Star className={cn("text-yellow-500 h-3 w-3")}/>
-									<h6 className="text-gray-400">{product.rating}</h6>
+									<h6 className="text-gray-600">4.8</h6>
 									<hr className="w-[1px] h-5 bg-gray-300"/>
-									<h3>Sold {parseInt(product.sold) > 500 ? (
+									<h3 className="text-primary text-xl">{(product.qty_aval) > 500 ? (
 										<span>700+</span>
-									) : (<span>{product.sold}</span>)}</h3>
+									) : (<span>{product.qty_aval}</span>)}</h3>
 								</div>
 							</div>
 						</Link>
@@ -65,5 +66,3 @@ const ProductsLike = ({product}: ProductProps) => {
     </div>
   )
 }
-
-export default ProductsLike

@@ -12,7 +12,7 @@ const ExploreCategories = () => {
         <div className="w-full items-center flex flex-col space-y-10">
 
             <div className="w-full flex justify-center md:justify-normal mt-10">
-                <h4 className="font-bold text-md md:text-3xl">
+                <h4 className="font-bold text-primary text-md md:text-3xl">
                     Explore Popular Categories
                 </h4>
             </div>
