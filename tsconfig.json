@@ -19,6 +19,7 @@
       }
     ],
     "paths": {
+      "react-country-state-city": ["./types/react-country-state-city.d.ts"],
       "@/*": ["./*"]
     }
   },
